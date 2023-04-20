@@ -8,12 +8,12 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class Database extends SQLiteOpenHelper {
     public Database(Context context) {
-        super(context, "UserData", null, 1);
+        super(context, "DataUser", null, 1);
     }
 
     @Override
     public void onCreate(SQLiteDatabase DB) {
-        DB.execSQL("create table userdetails(name TEXT primary key,age TEXT,gender TEXT)");
+        DB.execSQL("create table userdetails(name TEXT primary key,age TEXT,gender TEXT,image BLOB)");
 
     }
 
@@ -28,6 +28,8 @@ public class Database extends SQLiteOpenHelper {
         contentValues.put("name",name);
         contentValues.put("age",age);
         contentValues.put("gender",gender);
+        //contentValues.put("image",image);
+
         long result=DB.insert("userdetails",null,contentValues);
         if (result==-1){
             return false;
