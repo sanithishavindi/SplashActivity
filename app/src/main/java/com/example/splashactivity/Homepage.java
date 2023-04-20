@@ -41,18 +41,18 @@ public class Homepage extends AppCompatActivity {
 
                 Intent intent= new Intent(Homepage.this,addData.class);
                 startActivity(intent);
-                finish();
+
 
             }
         });
-        /*  list_data.setOnClickListener(new View.OnClickListener() {
+          list_data.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent3 = new Intent(Homepage.this, listData.class);
                 startActivity(intent3);
-                finish();
+
             }
-        });*/
+        });
 
     }
 

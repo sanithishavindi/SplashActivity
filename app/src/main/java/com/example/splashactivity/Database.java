@@ -8,7 +8,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class Database extends SQLiteOpenHelper {
     public Database(Context context) {
-        super(context, "User Data", null, 1);
+        super(context, "UserData", null, 1);
     }
 
     @Override
@@ -22,12 +22,12 @@ public class Database extends SQLiteOpenHelper {
       DB.execSQL("drop table if exists userdetails");
     }
 
-    public Boolean saveuserdata(String name, String age){
+    public Boolean saveuserdata(String name, String age,String gender){
         SQLiteDatabase DB= this.getWritableDatabase();
         ContentValues contentValues=new ContentValues();
         contentValues.put("name",name);
         contentValues.put("age",age);
-       // contentValues.put("gender",gender);
+        contentValues.put("gender",gender);
         long result=DB.insert("userdetails",null,contentValues);
         if (result==-1){
             return false;

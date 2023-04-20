@@ -10,7 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.RadioGroup;
+import android.widget.RadioButton;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -25,8 +25,9 @@ public class addData extends AppCompatActivity {
     EditText name,age;
     ImageView image;
     Button savebtn,viewbtn;
-    RadioGroup gender;
+    RadioButton male,female;
     Database DB;
+    String gender;
 
 
     @Override
@@ -40,7 +41,8 @@ public class addData extends AppCompatActivity {
         image=findViewById(R.id.imageView);
         savebtn=findViewById(R.id.button6);
         viewbtn=findViewById(R.id.button7);
-        gender=findViewById(R.id.radiogroup);
+        male=findViewById(R.id.radioButton2);
+        female=findViewById(R.id.radioButton3);
         DB=new Database(this);
 
         image.setImageURI(null);
@@ -60,13 +62,19 @@ public class addData extends AppCompatActivity {
         savebtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String name1, age1, gender1;
+                String name1, age1;
                // Drawable image1;
 
                 name1 = name.getText().toString().trim();
                 age1 = age.getText().toString().trim();
-                gender1 = gender.getCheckedRadioButtonId() == R.id.radioButton2 ? "Male" : "Female";
-                Boolean savedata=DB.saveuserdata(name1,age1);
+                if(male.isChecked()){
+                    gender="male";
+                }
+                else {
+                    gender="female";
+                }
+
+                Boolean savedata=DB.saveuserdata(name1,age1,gender);
 
                 if (TextUtils.isEmpty(name1)) {
                     Toast.makeText(addData.this, "Enter Name", Toast.LENGTH_LONG).show();
@@ -100,7 +108,7 @@ public class addData extends AppCompatActivity {
                 while (WL.moveToNext()){
                     buffer.append("Name: "+WL.getString(0)+"\n");
                     buffer.append("Age: "+WL.getString(1)+"\n\n");
-                    //buffer.append("Gender: "+WL.getString(2)+"\n\n\n");
+                    buffer.append("Gender: "+WL.getString(2)+"\n\n\n");
                 }
                 AlertDialog.Builder builder=new AlertDialog.Builder(addData.this);
                 builder.setCancelable(true);
